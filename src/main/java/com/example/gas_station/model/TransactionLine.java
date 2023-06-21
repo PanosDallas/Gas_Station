@@ -1,14 +1,17 @@
 package com.example.gas_station.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "transaction_line", schema = "gas_station")
 public class TransactionLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idtl", nullable = false)
-    private Long idtl;
+    @Column(name = "id_transaction_line", nullable = false)
+    private Long idTransactionLine;
     @Basic
     @Column(name = "quantity", nullable = false, length = -1)
     private String quantity;
@@ -27,19 +30,18 @@ public class TransactionLine {
     @Basic
     @Column(name = "total_value", nullable = false, length = -1)
     private String totalValue;
-    @Basic
-    @Column(name = "idt", nullable = false)
-    private Long idt;
-    @Basic
-    @Column(name = "idc", nullable = false)
-    private Long idc;
 
-    public Long getIdtl() {
-        return idtl;
+    @ManyToOne
+    @JoinColumn(name="id_transaction", nullable=false)
+    @JsonBackReference
+    private Transaction transaction;
+
+    public Long getIdTransactionLine() {
+        return idTransactionLine;
     }
 
-    public void setIdtl(Long idtl) {
-        this.idtl = idtl;
+    public void setIdTransactionLine(Long idTransactionLine) {
+        this.idTransactionLine = idTransactionLine;
     }
 
     public String getQuantity() {
@@ -90,55 +92,23 @@ public class TransactionLine {
         this.totalValue = totalValue;
     }
 
-    public Long getIdt() {
-        return idt;
+    public Transaction getTransaction() {
+        return transaction;
     }
 
-    public void setIdt(Long idt) {
-        this.idt = idt;
-    }
-
-    public Long getIdc() {
-        return idc;
-    }
-
-    public void setIdc(Long idc) {
-        this.idc = idc;
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TransactionLine that = (TransactionLine) o;
-
-        if (idtl != null ? !idtl.equals(that.idtl) : that.idtl != null) return false;
-        if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
-        if (itemPrice != null ? !itemPrice.equals(that.itemPrice) : that.itemPrice != null) return false;
-        if (netValue != null ? !netValue.equals(that.netValue) : that.netValue != null) return false;
-        if (discountPercent != null ? !discountPercent.equals(that.discountPercent) : that.discountPercent != null)
-            return false;
-        if (discountValue != null ? !discountValue.equals(that.discountValue) : that.discountValue != null)
-            return false;
-        if (totalValue != null ? !totalValue.equals(that.totalValue) : that.totalValue != null) return false;
-        if (idt != null ? !idt.equals(that.idt) : that.idt != null) return false;
-        if (idc != null ? !idc.equals(that.idc) : that.idc != null) return false;
-
-        return true;
+        if (!(o instanceof TransactionLine that)) return false;
+        return Objects.equals(idTransactionLine, that.idTransactionLine) && Objects.equals(quantity, that.quantity) && Objects.equals(itemPrice, that.itemPrice) && Objects.equals(netValue, that.netValue) && Objects.equals(discountPercent, that.discountPercent) && Objects.equals(discountValue, that.discountValue) && Objects.equals(totalValue, that.totalValue) && Objects.equals(transaction, that.transaction);
     }
 
     @Override
     public int hashCode() {
-        int result = idtl != null ? idtl.hashCode() : 0;
-        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
-        result = 31 * result + (itemPrice != null ? itemPrice.hashCode() : 0);
-        result = 31 * result + (netValue != null ? netValue.hashCode() : 0);
-        result = 31 * result + (discountPercent != null ? discountPercent.hashCode() : 0);
-        result = 31 * result + (discountValue != null ? discountValue.hashCode() : 0);
-        result = 31 * result + (totalValue != null ? totalValue.hashCode() : 0);
-        result = 31 * result + (idt != null ? idt.hashCode() : 0);
-        result = 31 * result + (idc != null ? idc.hashCode() : 0);
-        return result;
+        return Objects.hash(idTransactionLine, quantity, itemPrice, netValue, discountPercent, discountValue, totalValue, transaction);
     }
 }

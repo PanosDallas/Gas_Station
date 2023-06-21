@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gas Station Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* CSS Styles */
+        body {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 1fr;
+            min-height: 100vh;
+            background-color: aliceblue;
+            color: lightcoral;
+            font-family: Arial, sans-serif;
+            margin: 1em;
+            padding: 1em;
+        }
+        @keyframes moveUpDown {
+            50% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        @keyframes changeSize{
+            0% {
+                font-size: 14px;
+            }
+            50% {
+                font-size: 26px;
+            }
+            100% {
+                font-size: 14px;
+            }
+        }
+
+        h1 {
+            animation: moveUpDown 4s ease-in-out infinite, changeColor 2s linear infinite;
+            color: blue;
+        }
+        h2 {
+            animation:  changeColor 4s linear infinite;
+            font-size: 24px;
+            color: red; /* Change the color to your desired value */
+        }
+
+        @keyframes changeColor {
+            0% {
+                color: blue; /* Starting color */
+            }
+            50% {
+                color: red; /* Color transition */
+            }
+            50% {
+                color: yellow; /* Ending color */
+            }
+        }
+
+
+        header {
+            background-color: cyan;
+            color: lightcoral;
+            padding: 10px;
+            text-align: center;
+        }
+        img{
+            display: block;
+            margin: auto;
+            object-fit: cover;
+        }
+
+        .nav-container {
+            border: 1px solid cyan;
+        }
+
+        nav {
+            background-color: lightcoral;
+            color: cyan;
+            padding: 12px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px;
+            background-color: antiquewhite;
+        }
+
+        .news {
+            padding: 20px;
+            margin: 10px;
+            background-color: lightcyan;
+        }
+
+        .footer-container {
+
+            border: 1px solid red;
+        }
+
+        footer {
+            animation: changeSize 10s ease-in-out infinite;
+            background-color: cyan;
+            color: lightcoral;
+            padding: 10px;
+            text-align: center;
+        }
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(200px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: lightcoral;
+            position: relative;
+            animation: move 5s linear infinite;
+            float: left;
+            margin-right: 10px;
+            border: 1px solid red;
+            resize: inherit;
+
+        }
+        iframe{
+            animation: changeSize 10s ease-in-out infinite;
+            width: 100px;
+            height: 100px;
+            float: right;
+        }
+
+    </style>
+</head>
+<body>
+<header class="header-container">
+    <div class="content-wrapper">
+        <address>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1629687.941439235!2d23.5035676!3d37.08168175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sel!2sgr!4v1685107652656!5m2!1sel!2sgr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </address>
+    <img class="logo" src="https://media.istockphoto.com/id/1388909838/vector/tyre-cartoon-car-mechanic-service-mascot.jpg?s=612x612&w=0&k=20&c=kZWMCCxV6QjzkFcdpwmSpir7XyB1M4yASmANHYRd5-0=" width="60" height="60">
+        <h1>Welcome to Our Gas Station</h1>
+    </div>
+</header>
+
+<nav class = "nav-container">
+    <ul>
+        <li><a href = "https://www.bp.com/el_gr/greece/retail.html"  target= "_blank">HOME</a></li>
+        <li><a href="https://www.bp.com/el_gr/greece/retail/measures.html>Covid-19 Μέτρα Προστασίας"  target= "_blank">Covid-19</a></li>
+        <li><a href="https://www.bp.com/el_gr/greece/retail/find-nearest-bp.html" target= "_blank">BP MAP</a></li>
+        <li><a href="https://www.bp.com/el_gr/greece/retail/products-and-services/services/mybp-app.html" target= "_blank">mybp app</a></li>
+        <li><a href="https://www.bp.com/el_gr/greece/retail/products-and-services/services/fleet-cards.html" target= "_blank">BP Card</a></li>
+        <li><a href="https://www.bp.com/el_gr/greece/retail/products-and-services/services/bp_gift_cards.html" target= "_blank">BP Gift Card</a></li>
+        <li><a href="https://www.bp.com/el_gr/greece/retail/tips-for-your-car.html">Car Tips</a></li>
+        <li><a href = "https://www.bp.com/el_gr/greece/retail.html" target= "_blank">/BP Global/</a></li>
+        <li><a href = "https://www.shell.com/" target= "_blank">/Shell Global/</a></li>
+        <li><input type="date" id="page-search-input" name="date" min=""></li>
+        <li><a href = "mailto:csekas@gmail.com" >/e-mail the owner/</a></li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <section id="customers">
+                <h2>Customer</h2>
+                <!-- Add customer information and details here -->
+            </section>
+
+            <section id="employees">
+                <h2>Employee</h2>
+                <!-- Add employee information and details here -->
+            </section>
+
+            <section id="products">
+                <h2>Product</h2>
+                <!-- Add product information and details here -->
+            </section>
+
+            <section id="services">
+                <h2>Service</h2>
+                <!-- Add service information and details here -->
+            </section>
+
+            <section id="fuel">
+                <h2>Type of Fuel</h2>
+                <!-- Add fuel information and details here -->
+            </section>
+
+            <section id="transaction">
+                <h2>Transaction</h2>
+                <!-- Add transaction information and details here -->
+            </section>
+            <section id="tips">
+                <h2>TIPS</h2>
+            </section>
+        </div>
+
+        <div class="col-md-4">
+            <section id="news" class="news">
+
+                <h2>News</h2>
+                <strong>
+                   <p> The Energy Security Scenarios </strong></p>
+                   <em>As the world recovered from the COVID-19 pandemic it was already facing
+                    a challenging set of circumstances , with austerity looming,
+                    energy prices rising and security tensions increasing.
+                    The Russian invasion of Ukraine amplified many of these challenges
+                       and brought security to the very top of the global agenda.
+                       The Energy Security Scenarios consist of two scenarios called
+                       Archipelagos and Sky 2050. They explore how different country
+                       archetypes react to the tensions and trends and ask:
+                       "Can a world desperate for immediate security also meet the
+                       long-term challenge of climate change?"
+              </em></p><br><br>
+                <p><strong>Explore the Energy Security Scenarios in an interactive
+                    journey through time</strong></p>
+                    <pre><em>
+                Discover what could happen and when in our
+                new scenarios,Archipelagos and Sky 2050
+                and ideas on how to close
+                the gap between the two.
+                    </em></pre>
+
+            </section>
+        </div>
+
+    </div>
+</div>
+
+<footer class="footer-container">
+    <p>&copy; 2023 Gas Station Website. All rights reserved.</p>
+</footer>
+</body>
+</html>

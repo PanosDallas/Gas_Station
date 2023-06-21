@@ -1,16 +1,19 @@
 package com.example.gas_station.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "transaction", schema = "gas_station")
+@Table(name = "transactions", schema = "gas_station")
 public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idt", nullable = false)
-    private Long idt;
+    @Column(name = "id_transaction", nullable = false)
+    private Long idTransaction;
     @Basic
     @Column(name = "date", nullable = false)
     private Timestamp date;
@@ -20,19 +23,27 @@ public class Transaction {
     @Basic
     @Column(name = "total_value", nullable = false, length = -1)
     private String totalValue;
-    @Basic
-    @Column(name = "idc", nullable = false)
-    private Long idc;
-    @Basic
-    @Column(name = "ide", nullable = false)
-    private Long ide;
 
-    public Long getIdt() {
-        return idt;
+    @Basic
+    @Column(name = "id_customer", nullable = false, length = -1)
+    private Long idCustomer;
+    @Basic
+    @Column(name = "id_employee", nullable = false, length = -1)
+    private Long idEmployee;
+
+    @OneToMany(mappedBy = "transaction")
+    @JsonManagedReference
+    private List<TransactionLine> transactionLines;
+
+    public Transaction() {
     }
 
-    public void setIdt(Long idt) {
-        this.idt = idt;
+    public Long getIdTransaction() {
+        return idTransaction;
+    }
+
+    public void setIdTransaction(Long idTransaction) {
+        this.idTransaction = idTransaction;
     }
 
     public Timestamp getDate() {
@@ -59,48 +70,39 @@ public class Transaction {
         this.totalValue = totalValue;
     }
 
-    public Long getIdc() {
-        return idc;
+    public Long getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setIdc(Long idc) {
-        this.idc = idc;
+    public void setIdCustomer(Long idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
-    public Long getIde() {
-        return ide;
+    public Long getIdEmployee() {
+        return idEmployee;
     }
 
-    public void setIde(Long ide) {
-        this.ide = ide;
+    public void setIdEmployee(Long idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
+    public List<TransactionLine> getTransactionLines() {
+        return transactionLines;
+    }
+
+    public void setTransactionLines(List<TransactionLine> transactionLines) {
+        this.transactionLines = transactionLines;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Transaction that = (Transaction) o;
-
-        if (idt != null ? !idt.equals(that.idt) : that.idt != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (paymentMethod != null ? !paymentMethod.equals(that.paymentMethod) : that.paymentMethod != null)
-            return false;
-        if (totalValue != null ? !totalValue.equals(that.totalValue) : that.totalValue != null) return false;
-        if (idc != null ? !idc.equals(that.idc) : that.idc != null) return false;
-        if (ide != null ? !ide.equals(that.ide) : that.ide != null) return false;
-
-        return true;
+        if (!(o instanceof Transaction that)) return false;
+        return Objects.equals(idTransaction, that.idTransaction) && Objects.equals(date, that.date) && Objects.equals(paymentMethod, that.paymentMethod) && Objects.equals(totalValue, that.totalValue) && Objects.equals(idCustomer, that.idCustomer) && Objects.equals(idEmployee, that.idEmployee) && Objects.equals(transactionLines, that.transactionLines);
     }
 
     @Override
     public int hashCode() {
-        int result = idt != null ? idt.hashCode() : 0;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (paymentMethod != null ? paymentMethod.hashCode() : 0);
-        result = 31 * result + (totalValue != null ? totalValue.hashCode() : 0);
-        result = 31 * result + (idc != null ? idc.hashCode() : 0);
-        result = 31 * result + (ide != null ? ide.hashCode() : 0);
-        return result;
+        return Objects.hash(idTransaction, date, paymentMethod, totalValue, idCustomer, idEmployee, transactionLines);
     }
 }

@@ -3,12 +3,12 @@ package com.example.gas_station.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "item", schema = "gas_station")
+@Table(name = "items", schema = "gas_station")
 public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idi", nullable = false)
-    private Long idi;
+    @Column(name = "id_item", nullable = false)
+    private Long idItem;
     @Basic
     @Column(name = "code", nullable = false, length = -1)
     private String code;
@@ -24,22 +24,18 @@ public class Item {
     @Basic
     @Column(name = "cost", nullable = false, length = -1)
     private String cost;
-    @Basic
-    @Column(name = "idc", nullable = false)
-    private Long idc;
-    @Basic
-    @Column(name = "idt", nullable = false)
-    private Long idt;
-    @Basic
-    @Column(name = "idtl", nullable = false)
-    private Long idtl;
 
-    public Long getIdi() {
-        return idi;
+
+    @Basic
+    @Column(name = "id_transaction_line", nullable = false, length = -1)
+    private Long idTransactionLine;
+
+    public Long getIdItem() {
+        return idItem;
     }
 
-    public void setIdi(Long idi) {
-        this.idi = idi;
+    public void setIdItem(Long idItem) {
+        this.idItem = idItem;
     }
 
     public String getCode() {
@@ -82,29 +78,7 @@ public class Item {
         this.cost = cost;
     }
 
-    public Long getIdc() {
-        return idc;
-    }
 
-    public void setIdc(Long idc) {
-        this.idc = idc;
-    }
-
-    public Long getIdt() {
-        return idt;
-    }
-
-    public void setIdt(Long idt) {
-        this.idt = idt;
-    }
-
-    public Long getIdtl() {
-        return idtl;
-    }
-
-    public void setIdtl(Long idtl) {
-        this.idtl = idtl;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -113,30 +87,25 @@ public class Item {
 
         Item item = (Item) o;
 
-        if (idi != null ? !idi.equals(item.idi) : item.idi != null) return false;
+        if (idItem != null ? !idItem.equals(item.idItem) : item.idItem != null) return false;
         if (code != null ? !code.equals(item.code) : item.code != null) return false;
         if (description != null ? !description.equals(item.description) : item.description != null) return false;
         if (itemType != null ? !itemType.equals(item.itemType) : item.itemType != null) return false;
         if (price != null ? !price.equals(item.price) : item.price != null) return false;
         if (cost != null ? !cost.equals(item.cost) : item.cost != null) return false;
-        if (idc != null ? !idc.equals(item.idc) : item.idc != null) return false;
-        if (idt != null ? !idt.equals(item.idt) : item.idt != null) return false;
-        if (idtl != null ? !idtl.equals(item.idtl) : item.idtl != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = idi != null ? idi.hashCode() : 0;
+        int result = idItem != null ? idItem.hashCode() : 0;
         result = 31 * result + (code != null ? code.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (itemType != null ? itemType.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (cost != null ? cost.hashCode() : 0);
-        result = 31 * result + (idc != null ? idc.hashCode() : 0);
-        result = 31 * result + (idt != null ? idt.hashCode() : 0);
-        result = 31 * result + (idtl != null ? idtl.hashCode() : 0);
+
         return result;
     }
 }

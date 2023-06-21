@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<header class="header-container">
+    <div class="content-wrapper">
+        <img class="logo" src="https://media.istockphoto.com/id/1388909838/vector/tyre-cartoon-car-mechanic-service-mascot.jpg?s=612x612&w=0&k=20&c=kZWMCCxV6QjzkFcdpwmSpir7XyB1M4yASmANHYRd5-0=" width="60" height="60">
+    </div>
+    <title>Customer Management</title>
+</header>
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(200px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: lightcoral;
+            position: relative;
+            animation: move 5s linear infinite;
+            float: left;
+            margin-right: 10px;
+            border: 1px solid red;
+            resize: inherit;
+
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mb-4">Customer Management</h1>
+    <div class="card">
+        <div class="card-body">
+           <form id="customer-form">
+
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cardNumber" class="form-label">Card Number:</label>
+                    <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+               <button type="reset" class="btn btn-primary">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-success d-none" id="success-alert" role="alert">
+        Customer created/updated successfully!
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Customer List</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Card Number</th>
+                </tr>
+                </thead>
+                <tbody id="customer-table">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS -->
+ <script>
+    // Fetch customers from the server and populate the table
+    fetch('/CustomerController')
+        .then(response => response.json())
+        .then(data => {
+            const customerTable = document.getElementById('customer-table');
+            data.forEach(customer => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${customer.id}</td>
+                    <td>${customer.firstName}</td>
+                    <td>${customer.lastName}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.password}</td>
+                    <td>${customer.cardNumber}</td>
+                `;
+                customerTable.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+</script>
